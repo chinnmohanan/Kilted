@@ -1,0 +1,19 @@
+By default, ROS 2 communication is not limited to localhost. 
+ROS_LOCALHOST_ONLY environment variable allows you to limit ROS 2 communication to localhost only. 
+This means your ROS 2 system, and its topics, services, and actions will not be visible to other computers on the local network. 
+Using ROS_LOCALHOST_ONLY is helpful in certain settings, such as classrooms, where multiple robots may publish to the same topic causing strange behaviors. 
+You can set the environment variable with the following command:
+
+Linux
+    export ROS_LOCALHOST_ONLY=1  #Individual terminals wont communicate with other terminals in the same system.
+
+If all terminals of a system has to communicate between them and restrict communication with other systems in same network, use:
+
+    export ROS_DOMAIN_ID=<value between 0 and 101 (both inclusive)>
+
+By default all terminals have DOMAIN_ID=0.
+
+
+To maintain this setting between shell sessions, you can add the command to your shell startup script:
+
+    echo "export ROS_LOCALHOST_ONLY=1" >> ~/.bashrc
