@@ -1,0 +1,78 @@
+Write the subscriber node
+Return to ros2_ws/src/cpp_pubsub/src to create the next node. Enter the following code in your terminal:
+
+      touch subscriber_fn.cpp
+
+Entering ls in the console will now return:
+
+publisher_fn.cpp  subscriber_fn.cpp
+
+Open the subscriber_fn.cpp with your text editor.
+Paste the contents of subscriber_fn.cpp in the repository.
+
+===================================================================================================
+
+
+Since this node has the same dependencies as the publisher node, there’s nothing new to add to package.xml.
+
+CMakeLists.txt
+
+Reopen CMakeLists.txt and add the executable and target for the subscriber node below the publisher’s entries.
+
+add_executable(listener src/subscriber_fn.cpp)
+ament_target_dependencies(listener rclcpp std_msgs)
+
+install(TARGETS
+  talker
+  listener
+  DESTINATION lib/${PROJECT_NAME})
+
+Make sure to save the file, and then your pub/sub system should be ready.
+Build and run
+
+Still in the root of your workspace, ros2_ws, build your new package:
+colcon build --packages-select cpp_pubsub
+
+
+
+Open a new terminal, navigate to ros2_ws, and source the setup files:
+
+Result
+Now run the talker node:
+ros2 run cpp_pubsub talker
+The terminal should start publishing info messages every 0.5 seconds, like so:
+
+
+Open another terminal, source the setup files from inside ros2_ws again, and then start the listener node:
+ros2 run cpp_pubsub listener
+The listener will start printing messages to the console, starting at whatever message count the publisher is on at that time, like so:
+
+
+Enter Ctrl+C in each terminal to stop the nodes from spinning.
+
+==========================================================================================================================================================
+Python
+
+Return to ros2_ws/src/py_pubsub/py_pubsub to create the subscriber node "subscriber_fn.py".
+
+Copy the code to subscriber_fn.py from file "subscriber_fn.py" available in repository.
+=========================================================================================================
+
+Add an entry point
+Reopen setup.py and add the entry point for the subscriber node below the publisher’s entry point. The entry_points field should now look like this:
+
+entry_points={
+        'console_scripts': [
+                'talker = py_pubsub.publisher_fn:main',
+                'listener = py_pubsub.subscriber_fn:main',
+        ],
+},
+Make sure to save the file, and then your pub/sub system should be ready.
+
+In the root of your workspace, ros2_ws, build your new package:
+
+      colcon build --packages-select py_pubsub
+Source overlay workspace.
+
+Open another terminal, source the setup files from inside ros2_ws again, and then start the listener node. 
+The listener will start printing messages to the console, starting at whatever message count the publisher is on at that time.
