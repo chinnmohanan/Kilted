@@ -1,0 +1,22 @@
+Sourcing underlay workspace
+
+source /opt/ros/kilted/setup.bash
+
+
+Create a workspace
+First, create a directory "ros2_ws" to contain our workspace:
+
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws
+
+In the root of the workspace, run colcon build. 
+
+colcon build
+
+Source overlay workspace.
+When colcon has completed building successfully, the output will be in the install directory. 
+Before you can use any of the installed executables or libraries, you will need to add them to your path and library paths. 
+colcon will have generated bash/bat files in the install directory to help set up the environment. 
+These files will add all of the required elements to your path and library paths as well as provide any bash or shell commands exported by packages.
+
+source install/setup.bash
