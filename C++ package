@@ -20,4 +20,9 @@ ros2 pkg create --build-type ament_cmake --license Apache-2.0 <package_name>
 Build package :
 
 cd ~/ros2_ws
-colcon build
+colcon build    OR
+colcon build --packages-select my_package
+
+To run the executable you created using the --node-name argument during package creation, enter the command:
+
+ros2 run my_package my_node
