@@ -1,0 +1,29 @@
+A package is an organizational unit for your ROS 2 code. 
+If you want to be able to install your code or share it with others, then you’ll need it organized in a package. 
+With packages, you can release your ROS 2 work and allow others to build and use it easily.
+
+Package creation in ROS 2 uses ament as its build system and colcon as its build tool. 
+You can create a package using either CMake or Python, which are officially supported, though other build types do exist.
+
+Python package
+
+package.xml : file containing meta information about the package
+resource/<package_name> : marker file for the package
+setup.cfg : is required when a package has executables, so ros2 run can find them
+setup.py : containing instructions for how to install the package
+<package_name> : a directory with the same name as your package, used by ROS 2 tools to find your package, contains __init__.py
+
+To make Python package:
+
+cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_python --license Apache-2.0 <package_name>
+
+Build package :
+
+cd ~/ros2_ws
+colcon build    OR
+colcon build --packages-select my_package
+
+To run the executable you created using the --node-name argument during package creation, enter the command:
+
+ros2 run my_package my_node
